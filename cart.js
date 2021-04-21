@@ -104,7 +104,14 @@ function displayCart() {
       removeButton.classList.add('btn', 'btn-danger', 'my-2', 'py-1', 'px-2', 'remove');
       removeButton.setAttribute('aria-label', 'Remove');
       removeButton.innerHTML = '<i class="bi bi-trash-fill"></i>';
-      removeButton.addEventListener('click', removeItem);
+      //removeButton.setAttribute('onclick', 'removeItem(i);'); 
+      removeButton.onclick = function removeItem() {
+        let cartItemsArray = JSON.parse(localStorage.getItem('cart'));
+        cartItemsArray.splice(i, 1);
+        localStorage.setItem('cart', JSON.stringify(cartItemsArray));
+        //rerender page
+        location.reload();
+      }
 
       cart.appendChild(cartItem);
       cartItem.appendChild(item);
@@ -113,46 +120,9 @@ function displayCart() {
     }
   }
 }
-/////
 
 displayCart();
-
-/// vvv ISSUE WITH REMOVE BUTTON vvv ///////////////////////////////
-
-// Remove item from cart and update localStorage data
-function removeItem(i) {
-  let cartArray = JSON.parse(localStorage.getItem('cart'));
-  cartArray.splice(i, 1);
-  localStorage.setItem('cart', JSON.stringify(cartArray));
-
-  //let removeButton = document.getElementsByClassName('remove');
-  //removeButton[i].remove();
-  //rerender page
-  displayCart();
-
-}
-
-/*//remove from cart
-var removeCartItemButtons = document.getElementsByClassName('remove');
-for (var i = 0; i < removeCartItemButtons.length; i++) {
-    var button = removeCartItemButtons[i];
-    button.addEventListener('click', removeCartItem); 
-}
-
-//remove from localStorage
-function removeCartItem() {
-  //var buttonClicked = event.target;
-  //buttonClicked.parentElement.parentElement.remove();
-  for (let i =0; i < cartItemsArray.length; i++) {
-      cartItemsArray.splice(i, 1);
-      localStorage.setItem('cart', JSON.stringify(cartItemsArray));
-  }
-  //addNumCart();
-  //updateCartTotal();
-}
-/////*/
-
-/// ^^^ ISSUE WITH REMOVE BUTTON ^^^ ////////////////////////////////
+/////
 
 //calculate total cost
 function updateCartTotal () {
