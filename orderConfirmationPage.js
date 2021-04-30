@@ -2,7 +2,7 @@
 
 let thankYouName = document.querySelector('.thankYouName');
 
-thankYouName.innerHTML = 'Thank you,' + ' ' + sessionStorage.getItem('firstName') + '!';
+thankYouName.innerHTML = ' ' + sessionStorage.getItem('firstName') + '!';
 
 // DOM ELEMENT REFERENCES
 let totalCost = document.getElementById('total-cost');
